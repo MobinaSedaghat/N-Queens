@@ -96,18 +96,8 @@ def init_board(nqueens):
     return board
 
 
-"""
------------------- Do not change the code above! ------------------
-"""
-
 
 def random_search(board):
-    """
-    This function is an example and not an efficient solution to the nqueens problem. What it essentially does is flip
-    over the board and put all the queens on a random position.
-    :param board: list/array representation of columns and the row of the queen on that column
-    """
-
     i = 0
     optimum = (len(board) - 1) * len(board) / 2
 
@@ -158,20 +148,30 @@ def hill_climbing(board):
 
 
 def simulated_annealing(board):
-    """
-    Implement this yourself.
-    :param board:
-    :return:
-    """
-    pass
+    t = 10
+    start_time = time.time()
+    print(board)
+    while t > 1 and count_conflicts(board) != 0:
+        for col in range(len(board)):
+            board_copy = board.copy()
+            maax = evaluate_state(board_copy)
+            row = random.randint(0, len(board) - 1)
+            board_copy[col] = row
+            evaluate = evaluate_state(board_copy)
+            if evaluate >= maax:
+                board[col] = row
+            if evaluate < maax:
+                pr = mp.exp((evaluate - maax) / t)
+                if pr > 0.9:
+                    board[col] = row
+            t = t - 0.0001
+
+    print_board(board)
+    end_time = time.time()
+    print(end_time - start_time)
 
 
 def main():
-    """
-    Main function that will parse input and call the appropriate algorithm. You do not need to understand everything
-    here!
-    """
-
     try:
         if len(sys.argv) != 2:
             raise ValueError
