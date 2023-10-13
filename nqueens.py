@@ -66,10 +66,7 @@ def evaluate_state(board):
 
 
 def print_board(board):
-    """
-    Prints the board in a human readable format in the terminal.
-    :param board: The board with all the queens.
-    """
+
     print("\n")
 
     for row in range(len(board)):
@@ -83,10 +80,6 @@ def print_board(board):
 
 
 def init_board(nqueens):
-    """
-    :param nqueens integer for the number of queens on the board
-    :returns list/array representation of columns and the row of the queen on that column
-    """
 
     board = []
 
@@ -209,7 +202,6 @@ def main():
         simulated_annealing(board)
 
 
-# This line is the starting point of the program.
 if __name__ == "__main__":
     print(len(sys.argv))
     sys.argv.append(4)
